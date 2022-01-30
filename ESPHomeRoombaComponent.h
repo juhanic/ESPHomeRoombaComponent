@@ -54,6 +54,7 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
     Sensor *chargeSensor;
     Sensor *capacitySensor;
     Sensor *batteryPercentSensor;
+    Sensor *temperatureSensor;
     TextSensor *activitySensor;
 
     static RoombaComponent* instance(uint8_t brcPin, uint8_t rxPin, uint8_t txPin, Roomba::Baud baud, uint32_t updateInterval)
@@ -86,6 +87,7 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
       uint16_t charge;
       uint16_t capacity;
       uint8_t charging;
+      int16_t temperature;      
 
       // Flush serial buffers
       while (this->serial->available())
@@ -99,9 +101,11 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
           Roomba::SensorVoltage,        // 2 bytes, mV, unsigned
           Roomba::SensorCurrent,        // 2 bytes, mA, signed
           Roomba::SensorBatteryCharge,  // 2 bytes, mAh, unsigned
-          Roomba::SensorBatteryCapacity // 2 bytes, mAh, unsigned
+          Roomba::SensorBatteryCapacity, // 2 bytes, mAh, unsigned
+          Roomba::SensorBatteryTemperature // 2 bytes, °C, signed
+
       };
-      uint8_t values[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+      uint8_t values[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
       // Serial reading timeout -- https://community.home-assistant.io/t/add-wifi-to-an-older-roomba/23282/52
       bool success = this->roomba.getSensorsList(sensors, sizeof(sensors), values, sizeof(values));
@@ -114,6 +118,7 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
       charge = values[7] * 256 + values[8];
       capacity = values[9] * 256 + values[10];
       charging = values[2];
+      temperature = values[11];
 
       float battery_level = 100.0 * ((1.0 * charge) / (1.0 * capacity));
       std::string activity = this->get_activity(charging, current);
@@ -137,6 +142,9 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
       if (this->batteryPercentSensor->state != battery_level)
         this->batteryPercentSensor->publish_state(battery_level);
 
+      if (this->temperatureSensor->state != temperature)
+        this->temperatureSensor->publish_state(temperature);
+
       if (activity.compare(this->activitySensor->state) == 0)
         this->activitySensor->publish_state(activity);
     }
@@ -154,6 +162,7 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
         this->currentSensor = new Sensor();
         this->chargeSensor = new Sensor();
         this->capacitySensor = new Sensor();
+        this->batteryPercentSensor = new Sensor();
         this->batteryPercentSensor = new Sensor();
         this->activitySensor = new TextSensor();
     }
