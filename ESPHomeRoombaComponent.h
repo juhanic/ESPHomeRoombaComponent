@@ -38,10 +38,10 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
         || charging == Roomba::ChargeStateFullChanrging
         || charging == Roomba::ChargeStateTrickleCharging;
 
-      if (current > -50)
-        return "Docked";
-      else if (chargingState)
+      if (chargingState)
         return "Charging";
+      else if (current > -50)
+        return "Docked";
       else if (current < -300)
         return "Cleaning";
       return "Lost";
