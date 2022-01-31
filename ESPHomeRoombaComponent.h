@@ -102,7 +102,7 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
           Roomba::SensorCurrent,        // 2 bytes, mA, signed
           Roomba::SensorBatteryCharge,  // 2 bytes, mAh, unsigned
           Roomba::SensorBatteryCapacity, // 2 bytes, mAh, unsigned
-          Roomba::SensorBatteryTemperature // 2 bytes, °C, signed
+          Roomba::SensorBatteryTemperature // 1 bytes, °C, signed
 
       };
       uint8_t values[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -163,7 +163,7 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
         this->chargeSensor = new Sensor();
         this->capacitySensor = new Sensor();
         this->batteryPercentSensor = new Sensor();
-        this->batteryPercentSensor = new Sensor();
+        this->temperatureSensor = new Sensor();
         this->activitySensor = new TextSensor();
     }
 };
