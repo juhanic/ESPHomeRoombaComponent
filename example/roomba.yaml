@@ -6,6 +6,7 @@ esphome:
   includes:
     - roomba_component.h
   libraries:
+    - EspSoftwareSerial
     - Roomba=https://github.com/davidecavestro/Roomba.git
 #    - Roomba=file:///config/Roomba
 
