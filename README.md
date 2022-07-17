@@ -28,6 +28,23 @@ If you need this, uncomment the remote transmitter switch section in the `roomba
 The Wemos D1 mini is small enough to [fit into the compartment by one of the wheels](https://community-home-assistant-assets.s3.dualstack.us-west-2.amazonaws.com/optimized/2X/a/a258c7253f8bd3fe76ad9e7aa1202b60bd113d74_2_496x600.jpg). 
 But using a esp-01 or esp-12 series and some single braid wire I have managed to fit it all under the top lid without bulging or deformeties, the only visual defect is my led that is pointing at the IR reciever.
 
+## Custom Circuit Board
+
+This board was designed to be etched at home but could also be ordered from the likes of dirtypcbs.com/ oshpark/ etc.  
+
+If you want to recreate my circuit board exactly, you'll need:  
+ - Wemos D1 Mini
+ - USB Buck converter
+ - 10K Resistor
+
+![Parts](https://github.com/Ceiku/ESPHomeRoombaComponent/blob/master/PCB/pics/parts.jpeg)
+
+Pull 7 Header pins out of the pin headers that came with the Wemos D1 and stick them into the roomba's serial port, then place the board on top and solder the pins in place to get the alignment correct.  
+The next step is to remove the USB port from the buck converter PCB and stake it in place with 4 header pins, soldering it as close to the roomba PCB as possible.  
+After doing that, the resistor and transistor should be fitted into the board.  
+The final step is to solder the long headers into the wemos d1 and solder it as close to the roomba PCB as possible.. Test for short circuits before plugging it into the roomba!
+
+![Done](https://github.com/Ceiku/ESPHomeRoombaComponent/blob/master/PCB/pics/done.jpeg)
 
 ## Software Setup/Use
 
