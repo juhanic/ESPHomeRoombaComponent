@@ -9,7 +9,8 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
     Roomba roomba;
     SoftwareSerial *serial;
     bool IR = false;
-
+    
+  public:
     void brc_wakeup() {
         // Roomba Wakeup
         digitalWrite(this->brcPin, LOW);
@@ -25,8 +26,13 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
             this->roomba.cover();
         else if (command == "dock" || command == "return_to_base")
             this->roomba.dock();
-        else if (command == "locate")
-            this->roomba.playSong(1);
+        else if (command == "locate"){
+                uint8_t song[] = {62, 12, 66, 12, 69, 12, 74, 36};
+                this->roomba.safeMode();
+                this->roomba.song(0, song, sizeof(song));
+                this->roomba.playSong(0);
+                //this->roomba.playSong(1);
+            }
         else if (command == "spot" || command == "clean_spot")
             this->roomba.spot();
         else if (command == "wakeup" || command == "brc_wakeup")
@@ -47,7 +53,7 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
       return "Lost";
     }
 
-  public:
+
     Sensor *distanceSensor;
     Sensor *voltageSensor;
     Sensor *currentSensor;
