@@ -29,6 +29,7 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
         else if (command == "locate"){
                 uint8_t song[] = {62, 12, 66, 12, 69, 12, 74, 36};
                 this->roomba.safeMode();
+                delay(500);
                 this->roomba.song(0, song, sizeof(song));
                 this->roomba.playSong(0);
                 //this->roomba.playSong(1);
