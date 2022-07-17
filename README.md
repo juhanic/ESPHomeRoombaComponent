@@ -15,7 +15,7 @@ Using the brc pin we get the following:
 The PNP transistor is necessesary. Resistive dividers are hit or miss and a 2n4403 or a 2n3906 is cheap.
 
 Alternatively using the IR led:
-![IR wiring](https://github.com/Ceiku/ESPHomeRoombaComponent/blob/master/esp_roomba_IR.PNG)
+![IR wiring](https://github.com/Real-Time-Kodi/ESPHomeRoombaComponent/blob/master/esp_roomba_IR.PNG)
 
 ## Special Notes
 
@@ -37,14 +37,17 @@ If you want to recreate my circuit board exactly, you'll need:
  - USB Buck converter
  - 10K Resistor
 
-![Parts](https://github.com/Ceiku/ESPHomeRoombaComponent/blob/master/PCB/pics/parts.jpeg)
+![Parts](https://github.com/Real-Time-Kodi/ESPHomeRoombaComponent/blob/master/PCB/pics/parts.jpeg)
 
 Pull 7 Header pins out of the pin headers that came with the Wemos D1 and stick them into the roomba's serial port, then place the board on top and solder the pins in place to get the alignment correct.  
+
+![Pins](https://github.com/Real-Time-Kodi/ESPHomeRoombaComponent/blob/master/PCB/pics/pins.jpeg)
+
 The next step is to remove the USB port from the buck converter PCB and stake it in place with 4 header pins, soldering it as close to the roomba PCB as possible.  
 After doing that, the resistor and transistor should be fitted into the board.  
-The final step is to solder the long headers into the wemos d1 and solder it as close to the roomba PCB as possible.. Test for short circuits before plugging it into the roomba!
+The final step is to solder the long headers into the wemos d1 and solder it as close to the roomba PCB as possible. Cut all component leads flush with the bottom of the board to allow the board to seat properly against the roomba. Test for short circuits before plugging it into the roomba!
 
-![Done](https://github.com/Ceiku/ESPHomeRoombaComponent/blob/master/PCB/pics/done.jpeg)
+![Done](https://github.com/Real-Time-Kodi/ESPHomeRoombaComponent/blob/master/PCB/pics/done.jpeg)
 
 ## Software Setup/Use
 
