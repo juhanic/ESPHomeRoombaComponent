@@ -41,6 +41,7 @@ If you want to recreate my circuit board exactly, you'll need:
 
 Pull 7 Header pins out of the pin headers that came with the Wemos D1 and stick them into the roomba's serial port, then place the board on top and solder the pins in place to get the alignment correct.  
 
+![On Roomba](https://github.com/Real-Time-Kodi/ESPHomeRoombaComponent/blob/master/PCB/pics/on_roomba.jpeg)
 ![Pins](https://github.com/Real-Time-Kodi/ESPHomeRoombaComponent/blob/master/PCB/pics/pins.jpeg)
 
 The next step is to remove the USB port from the buck converter PCB and stake it in place with 4 header pins, soldering it as close to the roomba PCB as possible.  
