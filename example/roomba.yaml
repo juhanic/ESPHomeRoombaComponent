@@ -13,7 +13,7 @@ substitutions:
   name: "roomba"
   # BRC pin, RX pin, TX pin, polling interval in milliseconds
   # Pin 3 is labeled rx on the wemos d1 mini, 1 is labeled TX We don't use the hardware UART but we're using its pins!
-  init: 'RoombaComponent::instance(D8, 3, 1, Roomba::Baud115200, 5000);'
+  init: 'RoombaComponent::instance(D8, 3, 1, Roomba::Baud115200, 15000);'
 
 
 # Enable logging
@@ -43,7 +43,6 @@ status_led:
       inverted: true
 
 
-#Sensor things
 custom_component:
   - lambda: |-
       auto r = ${init}
@@ -58,21 +57,46 @@ sensor:
        unit_of_measurement: "mm"
        accuracy_decimals: 0
      - name: "${name} voltage"
-       unit_of_measurement: "mV"
-       accuracy_decimals: 0
+       unit_of_measurement: "V"
+       accuracy_decimals: 2
+       filters:
+        - median:
+            window_size: 7
+            send_every: 4
+            send_first_at: 3
+        - multiply: 0.001
      - name: "${name} current"
        unit_of_measurement: "mA"
        accuracy_decimals: 0
+       filters:
+        - median:
+            window_size: 7
+            send_every: 4
+            send_first_at: 3
      - name: "${name} charge"
        unit_of_measurement: "mAh"
        accuracy_decimals: 0
+       filters:
+        - median:
+            window_size: 7
+            send_every: 4
+            send_first_at: 3
      - name: "${name} capacity"
        unit_of_measurement: "mAh"
        accuracy_decimals: 0
+       filters:
+        - median:
+            window_size: 7
+            send_every: 4
+            send_first_at: 3
      - name: "${name} battery"
        unit_of_measurement: "%"
        accuracy_decimals: 0
-       
+       filters:
+        - median:
+            window_size: 7
+            send_every: 4
+            send_first_at: 3
 text_sensor:
   - platform: custom
     lambda: |-
@@ -85,7 +109,6 @@ text_sensor:
 button:
   - platform: template
     name: "Locate"
-    #should play a song. not working on my roomba 530
     on_press:
       lambda: |-
         auto r = ${init}
