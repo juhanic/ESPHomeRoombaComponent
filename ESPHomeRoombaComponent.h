@@ -152,7 +152,7 @@ class RoombaComponent : public PollingComponent, public CustomAPIDevice {
       if (this->temperatureSensor->state != temperature)
         this->temperatureSensor->publish_state(temperature);
 
-      if (activity.compare(this->activitySensor->state) == 0)
+      //if (activity.compare(this->activitySensor->state) == 0)
         this->activitySensor->publish_state(activity);
     }
 
