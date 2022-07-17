@@ -1,13 +1,18 @@
 # Roomba Component for ESPHome
 
-The inspiration is [Mannkind ESPHomeRoombaComponent](https://github.com/mannkind/ESPHomeRoombaComponent), that became deprecated due to dependency updates.
+  This is a quick and dirty update of [davidecavestro's work](https://github.com/davidecavestro/ESPHomeRoombaComponent) with a focus on giving a new user a reasonable chance of getting it working without digging through 100 forum threads. [This thread](https://community.home-assistant.io/t/add-wifi-to-an-older-roomba/23282/158) should be useful should there be any issues. I'll also be including my circuit board design for a small sandwich of boards that fit nicely on top of the roomba.
+  
+  I've added some notes and updates to the example in the example folder. My example config should get you up and running though there are a few bugs that still need to be worked out. ![dashboard example](https://github.com/Real-Time-Kodi/ESPHomeRoombaComponent/blob/master/demo.png)
+
+  The inspiration is [Mannkind ESPHomeRoombaComponent](https://github.com/mannkind/ESPHomeRoombaComponent), that became deprecated due to dependency updates.
 In addition I did not want the Roomba device to communicate over MQTT, it instead registers a service call for commands, and expose sensors through `roomba.yaml`.
 
 ## Hardware
 
 ## Wiring Guide
 Using the brc pin we get the following:
-![brc wiring](https://github.com/Ceiku/ESPHomeRoombaComponent/blob/master/esp_roomba_brc.PNG)
+![brc wiring](https://github.com/Real-Time-Kodi/ESPHomeRoombaComponent/blob/master/sch.png)
+The PNP transistor is necessesary. Resistive dividers are hit or miss and a 2n4403 or a 2n3906 is cheap.
 
 Alternatively using the IR led:
 ![IR wiring](https://github.com/Ceiku/ESPHomeRoombaComponent/blob/master/esp_roomba_IR.PNG)
