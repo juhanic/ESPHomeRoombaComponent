@@ -1,0 +1,29 @@
+esphome:
+  name: roomba
+
+esp8266:
+  board: d1_mini
+
+substitutions:
+  name: "roomba"
+
+uart:
+  id: uart_bus
+  tx_pin: D1
+  rx_pin: D2
+  baud_rate: 115200
+
+# Enable logging
+logger:
+  hardware_uart: UART1
+
+external_components:
+  - source: components
+
+sensor:
+  - platform: roomba
+    battery_percentage_sensor:
+      name: Roomba battery remaining
+    distance_sensor:
+      name: Roomba distance sensor
+    pin: 3
